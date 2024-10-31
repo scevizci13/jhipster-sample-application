@@ -1,0 +1,39 @@
+entity Musteri {
+    ad String required,
+    soyad String,
+    email String required unique,
+    telefon String,
+    adres String,
+    kayitTarihi ZonedDateTime
+}
+
+entity Urun {
+    isim String required,
+    fiyat BigDecimal required,
+    lisansAnahtari String unique,
+    yenilemeUcreti BigDecimal,
+    yenilemeTarihi ZonedDateTime,
+    aciklama String,
+    aktifMi Boolean
+}
+
+entity Satis {
+    satisTarihi ZonedDateTime required,
+    miktar Integer required,
+    toplamFiyat BigDecimal required,
+    odemeDurumu String,
+    teslimatAdresi String,
+    siparisNotu String
+}
+
+relationship ManyToOne {
+    Satis{musteri} to Musteri,
+    Satis{urun} to Urun
+}
+
+service all with serviceClass
+paginate all with pagination
+
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
