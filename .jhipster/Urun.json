@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20241031091311"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "isim",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fiyat",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lisansAnahtari",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "yenilemeUcreti",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "yenilemeTarihi",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "aciklama",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "aktifMi",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "Urun",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

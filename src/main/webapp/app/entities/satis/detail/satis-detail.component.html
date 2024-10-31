@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (satis(); as satisRef) {
+      <div>
+        <h2 data-cy="satisDetailsHeading"><span jhiTranslate="jhipsterSampleApplicationApp.satis.detail.title">Satis</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ satisRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.satis.satisTarihi">Satis Tarihi</span></dt>
+          <dd>
+            <span>{{ satisRef.satisTarihi | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.satis.miktar">Miktar</span></dt>
+          <dd>
+            <span>{{ satisRef.miktar }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.satis.toplamFiyat">Toplam Fiyat</span></dt>
+          <dd>
+            <span>{{ satisRef.toplamFiyat }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.satis.odemeDurumu">Odeme Durumu</span></dt>
+          <dd>
+            <span>{{ satisRef.odemeDurumu }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.satis.teslimatAdresi">Teslimat Adresi</span></dt>
+          <dd>
+            <span>{{ satisRef.teslimatAdresi }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.satis.siparisNotu">Siparis Notu</span></dt>
+          <dd>
+            <span>{{ satisRef.siparisNotu }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.satis.musteri">Musteri</span></dt>
+          <dd>
+            @if (satis()!.musteri) {
+              <div>
+                <a [routerLink]="['/musteri', satis()!.musteri?.id, 'view']">{{ satisRef.musteri?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.satis.urun">Urun</span></dt>
+          <dd>
+            @if (satis()!.urun) {
+              <div>
+                <a [routerLink]="['/urun', satis()!.urun?.id, 'view']">{{ satisRef.urun?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/satis', satisRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

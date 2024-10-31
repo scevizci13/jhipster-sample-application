@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20241031091310"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "ad",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "soyad",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "telefon",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adres",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "kayitTarihi",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "name": "Musteri",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}
