@@ -1,0 +1,53 @@
+{
+  "annotations": {
+    "changelogDate": "20241031091312"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "satisTarihi",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "miktar",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "toplamFiyat",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "odemeDurumu",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "teslimatAdresi",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "siparisNotu",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Satis",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "musteri",
+      "relationshipName": "musteri",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "urun",
+      "relationshipName": "urun",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -1,0 +1,124 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-urun-heading" data-cy="UrunCreateUpdateHeading" jhiTranslate="jhipsterSampleApplicationApp.urun.home.createOrEditLabel">
+        Create or edit a Urun
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="jhipsterSampleApplicationApp.urun.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let isimRef = editForm.get('isim')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_isim" jhiTranslate="jhipsterSampleApplicationApp.urun.isim">Isim</label>
+          <input type="text" class="form-control" name="isim" id="field_isim" data-cy="isim" formControlName="isim" />
+          @if (isimRef.invalid && (isimRef.dirty || isimRef.touched)) {
+            <div>
+              @if (editForm.get('isim')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let fiyatRef = editForm.get('fiyat')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_fiyat" jhiTranslate="jhipsterSampleApplicationApp.urun.fiyat">Fiyat</label>
+          <input type="number" class="form-control" name="fiyat" id="field_fiyat" data-cy="fiyat" formControlName="fiyat" />
+          @if (fiyatRef.invalid && (fiyatRef.dirty || fiyatRef.touched)) {
+            <div>
+              @if (editForm.get('fiyat')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('fiyat')?.errors?.number" jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let lisansAnahtariRef = editForm.get('lisansAnahtari')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_lisansAnahtari" jhiTranslate="jhipsterSampleApplicationApp.urun.lisansAnahtari"
+            >Lisans Anahtari</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lisansAnahtari"
+            id="field_lisansAnahtari"
+            data-cy="lisansAnahtari"
+            formControlName="lisansAnahtari"
+          />
+          @if (lisansAnahtariRef.invalid && (lisansAnahtariRef.dirty || lisansAnahtariRef.touched)) {
+            <div></div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_yenilemeUcreti" jhiTranslate="jhipsterSampleApplicationApp.urun.yenilemeUcreti"
+            >Yenileme Ucreti</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="yenilemeUcreti"
+            id="field_yenilemeUcreti"
+            data-cy="yenilemeUcreti"
+            formControlName="yenilemeUcreti"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_yenilemeTarihi" jhiTranslate="jhipsterSampleApplicationApp.urun.yenilemeTarihi"
+            >Yenileme Tarihi</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_yenilemeTarihi"
+              data-cy="yenilemeTarihi"
+              type="datetime-local"
+              class="form-control"
+              name="yenilemeTarihi"
+              formControlName="yenilemeTarihi"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_aciklama" jhiTranslate="jhipsterSampleApplicationApp.urun.aciklama">Aciklama</label>
+          <input type="text" class="form-control" name="aciklama" id="field_aciklama" data-cy="aciklama" formControlName="aciklama" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_aktifMi" jhiTranslate="jhipsterSampleApplicationApp.urun.aktifMi">Aktif Mi</label>
+          <input type="checkbox" class="form-check" name="aktifMi" id="field_aktifMi" data-cy="aktifMi" formControlName="aktifMi" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

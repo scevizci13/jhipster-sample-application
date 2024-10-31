@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (musteri(); as musteriRef) {
+      <div>
+        <h2 data-cy="musteriDetailsHeading"><span jhiTranslate="jhipsterSampleApplicationApp.musteri.detail.title">Musteri</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ musteriRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.musteri.ad">Ad</span></dt>
+          <dd>
+            <span>{{ musteriRef.ad }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.musteri.soyad">Soyad</span></dt>
+          <dd>
+            <span>{{ musteriRef.soyad }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.musteri.email">Email</span></dt>
+          <dd>
+            <span>{{ musteriRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.musteri.telefon">Telefon</span></dt>
+          <dd>
+            <span>{{ musteriRef.telefon }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.musteri.adres">Adres</span></dt>
+          <dd>
+            <span>{{ musteriRef.adres }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.musteri.kayitTarihi">Kayit Tarihi</span></dt>
+          <dd>
+            <span>{{ musteriRef.kayitTarihi | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/musteri', musteriRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

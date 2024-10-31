@@ -1,0 +1,187 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-satis-heading"
+        data-cy="SatisCreateUpdateHeading"
+        jhiTranslate="jhipsterSampleApplicationApp.satis.home.createOrEditLabel"
+      >
+        Create or edit a Satis
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="jhipsterSampleApplicationApp.satis.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let satisTarihiRef = editForm.get('satisTarihi')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_satisTarihi" jhiTranslate="jhipsterSampleApplicationApp.satis.satisTarihi"
+            >Satis Tarihi</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_satisTarihi"
+              data-cy="satisTarihi"
+              type="datetime-local"
+              class="form-control"
+              name="satisTarihi"
+              formControlName="satisTarihi"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (satisTarihiRef.invalid && (satisTarihiRef.dirty || satisTarihiRef.touched)) {
+            <div>
+              @if (editForm.get('satisTarihi')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('satisTarihi')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let miktarRef = editForm.get('miktar')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_miktar" jhiTranslate="jhipsterSampleApplicationApp.satis.miktar">Miktar</label>
+          <input type="number" class="form-control" name="miktar" id="field_miktar" data-cy="miktar" formControlName="miktar" />
+          @if (miktarRef.invalid && (miktarRef.dirty || miktarRef.touched)) {
+            <div>
+              @if (editForm.get('miktar')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('miktar')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let toplamFiyatRef = editForm.get('toplamFiyat')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_toplamFiyat" jhiTranslate="jhipsterSampleApplicationApp.satis.toplamFiyat"
+            >Toplam Fiyat</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="toplamFiyat"
+            id="field_toplamFiyat"
+            data-cy="toplamFiyat"
+            formControlName="toplamFiyat"
+          />
+          @if (toplamFiyatRef.invalid && (toplamFiyatRef.dirty || toplamFiyatRef.touched)) {
+            <div>
+              @if (editForm.get('toplamFiyat')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('toplamFiyat')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_odemeDurumu" jhiTranslate="jhipsterSampleApplicationApp.satis.odemeDurumu"
+            >Odeme Durumu</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="odemeDurumu"
+            id="field_odemeDurumu"
+            data-cy="odemeDurumu"
+            formControlName="odemeDurumu"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_teslimatAdresi" jhiTranslate="jhipsterSampleApplicationApp.satis.teslimatAdresi"
+            >Teslimat Adresi</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="teslimatAdresi"
+            id="field_teslimatAdresi"
+            data-cy="teslimatAdresi"
+            formControlName="teslimatAdresi"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_siparisNotu" jhiTranslate="jhipsterSampleApplicationApp.satis.siparisNotu"
+            >Siparis Notu</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="siparisNotu"
+            id="field_siparisNotu"
+            data-cy="siparisNotu"
+            formControlName="siparisNotu"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_musteri" jhiTranslate="jhipsterSampleApplicationApp.satis.musteri">Musteri</label>
+          <select
+            class="form-control"
+            id="field_musteri"
+            data-cy="musteri"
+            name="musteri"
+            formControlName="musteri"
+            [compareWith]="compareMusteri"
+          >
+            <option [ngValue]="null"></option>
+            @for (musteriOption of musterisSharedCollection; track $index) {
+              <option [ngValue]="musteriOption">{{ musteriOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_urun" jhiTranslate="jhipsterSampleApplicationApp.satis.urun">Urun</label>
+          <select class="form-control" id="field_urun" data-cy="urun" name="urun" formControlName="urun" [compareWith]="compareUrun">
+            <option [ngValue]="null"></option>
+            @for (urunOption of urunsSharedCollection; track $index) {
+              <option [ngValue]="urunOption">{{ urunOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

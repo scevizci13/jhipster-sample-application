@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (urun(); as urunRef) {
+      <div>
+        <h2 data-cy="urunDetailsHeading"><span jhiTranslate="jhipsterSampleApplicationApp.urun.detail.title">Urun</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ urunRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.urun.isim">Isim</span></dt>
+          <dd>
+            <span>{{ urunRef.isim }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.urun.fiyat">Fiyat</span></dt>
+          <dd>
+            <span>{{ urunRef.fiyat }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.urun.lisansAnahtari">Lisans Anahtari</span></dt>
+          <dd>
+            <span>{{ urunRef.lisansAnahtari }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.urun.yenilemeUcreti">Yenileme Ucreti</span></dt>
+          <dd>
+            <span>{{ urunRef.yenilemeUcreti }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.urun.yenilemeTarihi">Yenileme Tarihi</span></dt>
+          <dd>
+            <span>{{ urunRef.yenilemeTarihi | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.urun.aciklama">Aciklama</span></dt>
+          <dd>
+            <span>{{ urunRef.aciklama }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.urun.aktifMi">Aktif Mi</span></dt>
+          <dd>
+            <span>{{ urunRef.aktifMi }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/urun', urunRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

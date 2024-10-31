@@ -1,0 +1,171 @@
+<div>
+  <h2 id="page-heading" data-cy="SatisHeading">
+    <span jhiTranslate="jhipsterSampleApplicationApp.satis.home.title">Satis</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.satis.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-satis"
+        [routerLink]="['/satis/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.satis.home.createLabel">Create a new Satis</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (satis?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="jhipsterSampleApplicationApp.satis.home.notFound">No Satis found</span>
+    </div>
+  }
+
+  @if (satis && satis.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="satisTarihi">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.satis.satisTarihi">Satis Tarihi</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="miktar">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.satis.miktar">Miktar</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="toplamFiyat">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.satis.toplamFiyat">Toplam Fiyat</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="odemeDurumu">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.satis.odemeDurumu">Odeme Durumu</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="teslimatAdresi">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.satis.teslimatAdresi">Teslimat Adresi</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="siparisNotu">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.satis.siparisNotu">Siparis Notu</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="musteri.id">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.satis.musteri">Musteri</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="urun.id">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.satis.urun">Urun</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (satis of satis; track trackId(satis)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/satis', satis.id, 'view']">{{ satis.id }}</a>
+              </td>
+              <td>{{ satis.satisTarihi | formatMediumDatetime }}</td>
+              <td>{{ satis.miktar }}</td>
+              <td>{{ satis.toplamFiyat }}</td>
+              <td>{{ satis.odemeDurumu }}</td>
+              <td>{{ satis.teslimatAdresi }}</td>
+              <td>{{ satis.siparisNotu }}</td>
+              <td>
+                @if (satis.musteri) {
+                  <div>
+                    <a [routerLink]="['/musteri', satis.musteri.id, 'view']">{{ satis.musteri.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (satis.urun) {
+                  <div>
+                    <a [routerLink]="['/urun', satis.urun.id, 'view']">{{ satis.urun.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/satis', satis.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/satis', satis.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(satis)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (satis && satis.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>
